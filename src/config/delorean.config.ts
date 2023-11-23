@@ -1,18 +1,27 @@
 import background from 'assets/intro-background.jpg';
 
+const greenColor = '#0F9D58';
+const blueColor = '#4285F4';
+const yellowColor = '#fbbc03';
+const almostBlack = '#E8';
+
 export const SiteTheme = {
-  Secondary: '#03dac4',
-  Primary: '#1565c0',
+  Secondary: yellowColor,
+  Primary: blueColor,
   AppBar: {
-    Primary: '#13191e',
+    Primary: almostBlack,
     Color: '#fff'
   },
+  InfoSection: {
+    backgroundColor: almostBlack,
+    color: '#fff'
+  },
   CallToAction: {
-    backgroundColor: '#6200EE',
+    backgroundColor: greenColor,
     color: '#fff'
   },
   SponsorHeader: {
-    backgroundColor: '#6200EE',
+    backgroundColor: greenColor,
     color: '#fff'
   },
   HeroBackground: {

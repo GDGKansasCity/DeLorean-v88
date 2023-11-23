@@ -2,7 +2,8 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
 
-import { Button } from '@mui/material';
+import { Button, Fab } from '@mui/material';
+import { ArrowRight } from '@mui/icons-material';
 
 import Venue from './sections/Map';
 import Sponsors from './sections/Sponsors';
@@ -64,6 +65,34 @@ const Home: FC<HomeProps> = ({ config }) => {
                 target='_blank'>
               Get Tickets
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="call-to-action" style={SiteTheme.InfoSection}>
+        <div className="container">
+          <h1 className="container-thin">
+            Show up early and stay late!
+          </h1>
+
+          <p>Registration and breakfast will start at 7:45.</p>
+          <p>Boxed lunches will be provided.</p>
+          <p>Be sure to stay through the clsoing remarks for some special giveaways!</p>
+        </div>
+      </section>
+
+      <section className="call-to-action" style={SiteTheme.CallToAction}>
+        <div className="container">
+          <h1 className="container-thin">
+            Looking for all the sessions and speakers?
+          </h1>
+
+          <p>View the Schedule page to see all the details.</p>
+
+          <div className="action">
+            <Fab href="/schedule">
+              <ArrowRight />
+            </Fab>
           </div>
         </div>
       </section>
