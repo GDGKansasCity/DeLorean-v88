@@ -3,6 +3,7 @@ import background from 'assets/intro-background.jpg';
 const greenColor = '#0F9D58';
 const blueColor = '#4285F4';
 const yellowColor = '#fbbc03';
+const redColor = '#ea4335';
 const almostBlack = '#E8';
 
 export const SiteTheme = {

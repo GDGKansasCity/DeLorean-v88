@@ -72,12 +72,13 @@ const Home: FC<HomeProps> = ({ config }) => {
       <section className="call-to-action" style={SiteTheme.InfoSection}>
         <div className="container">
           <h1 className="container-thin">
-            Show up early and stay late!
+            What can you expect from a day at DevFest KC?
           </h1>
 
-          <p>Registration and breakfast will start at 7:45.</p>
-          <p>Boxed lunches will be provided.</p>
-          <p>Be sure to stay through the clsoing remarks for some special giveaways!</p>
+          <p>Show up early and grab a boxed breakfast. <b>Registration and breakfast start at 7:45.</b></p>
+          <p>Strike up a conversation with someone between sessions. DevFest attracts a wide range of attendees, from long-time career developers to students.</p>
+          <p><b>Boxed lunches will be provided</b> and give plenty of time to meet new people.</p>
+          <p>Be sure to stay through the closing remarks for some <b>special giveaways!</b></p>
         </div>
       </section>
 
