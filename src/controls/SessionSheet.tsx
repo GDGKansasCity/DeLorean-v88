@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import { DocumentReference, deleteDoc } from '@firebase/firestore';
+import { intervalToDuration } from 'date-fns/fp';
 import createDOMPurify from 'dompurify';
 
 import { Speaker } from 'models/speaker';
@@ -54,19 +55,8 @@ const SessionSheet: FC<SessionSheetProps> = ({
     editSession(reference, session);
   };
 
-  const shouldShowDescription = () => {
-    console.log(`Session ${session.name} has ${session.description.length} description length`);
-    return session.description.length > 0;
-  }
-
-  const shouldShowSpeakers = () => {
-    console.log(`Session ${session.name} has ${session.speakers.length} speakers`);
-    return session.speakers.length > 0;
-  }
-
-  const shouldShowAccordion = () => {
-    return shouldShowDescription() || shouldShowSpeakers();
-  }
+  const hasDescription = useMemo(() => session.description.length > 0, [session.description]);
+  const hasSpeakers = useMemo(() => session.speakers.length > 0, [session.speakers]);
 
   const buildAdminActions = () => (
     <div className="edit-actions">
@@ -121,21 +111,19 @@ const SessionSheet: FC<SessionSheetProps> = ({
   const formatSessionDuration = () => {
     if (!session.startTime || !session.endTime) return null;
 
-    const startDate = new Date(session.startTime.seconds * 1000);
-    const endDate = new Date(session.endTime.seconds * 1000);
-    
-    const seconds = Math.floor((endDate.getTime() - startDate.getTime()) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-  
-    if (hours > 0) {
-      return `${hours} hr ${minutes % 60} mins`;
+    const interval = intervalToDuration({
+      start: session.startTime.toDate(),
+      end: session.endTime.toDate()
+    });
+
+    if (interval.hours > 0) {
+      return `${interval.hours} hr ${interval.minutes} mins`;
     } else {
-      return `${minutes} mins`;
+      return `${interval.minutes} mins`;
     }
   }
 
-  if (!shouldShowAccordion()) {
+  if (!hasDescription && !hasSpeakers) {
     return (
       <Paper square className="session-card">
         {isEditMode ? buildAdminActions() : null}
@@ -151,33 +139,25 @@ const SessionSheet: FC<SessionSheetProps> = ({
         </AccordionSummary>
         <AccordionDetails>
           <div className="session-content">
-            { shouldShowDescription()
-                ? <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(session.description)}} />
-                : null
-            }
+            { hasDescription ? <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(session.description)}} /> : null }
+            { hasDescription && hasSpeakers ? <Divider className="divider" /> : null }
 
-            { shouldShowDescription() && shouldShowSpeakers()
-                ? <Divider hidden={!shouldShowDescription() && !shouldShowSpeakers()} className="divider" />
-                : null
-            }
-
-            { shouldShowSpeakers()
-                ? <div hidden={!shouldShowSpeakers()} className="speakers">
-                    <Typography variant="h6" className="header">
-                      Speakers
-                    </Typography>
-                    {
-                      speakers.map(speaker => (
-                        <ListItem key={speaker.name} button onClick={onSpeakerClicked(speaker)}>
-                          <ListItemAvatar>
-                            <Avatar className="big-avatar" alt={speaker.name} src={speaker.portraitUrl} />
-                          </ListItemAvatar>
-                          <ListItemText primary={speaker.name} secondary={speaker.company || null} />
-                        </ListItem>
-                      ))
-                    }
-                  </div>
-              : null
+            { hasSpeakers ?
+              <div className="speakers">
+                <Typography variant="h6" className="header">
+                  Speakers
+                </Typography>
+                {
+                  speakers.map(speaker => (
+                    <ListItem key={speaker.name} button onClick={onSpeakerClicked(speaker)}>
+                      <ListItemAvatar>
+                        <Avatar className="big-avatar" alt={speaker.name} src={speaker.portraitUrl} />
+                      </ListItemAvatar>
+                      <ListItemText primary={speaker.name} secondary={speaker.company || null} />
+                    </ListItem>
+                  ))
+                }
+              </div> : null
             }
           </div>
         </AccordionDetails>
