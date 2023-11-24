@@ -1,5 +1,3 @@
-import background from 'assets/intro-background.jpg';
-
 const greenColor = '#0F9D58';
 const blueColor = '#4285F4';
 const yellowColor = '#fbbc03';
@@ -24,11 +22,6 @@ export const SiteTheme = {
   SponsorHeader: {
     backgroundColor: greenColor,
     color: '#fff'
-  },
-  HeroBackground: {
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   }
 };
 

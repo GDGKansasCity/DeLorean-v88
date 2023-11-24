@@ -16,6 +16,7 @@ import { SiteTheme, EventbriteConfig } from 'config/delorean.config';
 import { DevfestDetails } from 'config/delorean.details.js';
 
 import Logo from 'assets/event-logo.svg';
+import background from 'assets/intro-background.jpg';
 
 import './index.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -45,7 +46,7 @@ const Home: FC<HomeProps> = ({ config }) => {
 
   return (
     <main className="home-page">
-      <section className="intro" style={SiteTheme.HeroBackground}>
+      <section className="intro" style={{ backgroundImage: `url(${background})` }}>
         <div className="container">
           <Logo className="event-logo mb-4"/>
 
