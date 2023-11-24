@@ -79,6 +79,8 @@ class Footer extends React.Component<FooterProps> {
             </span>
           </div>
 
+          {this.buildSocialLinks(config)}
+
           <div className="sources-right">
             <a href={config && config.org ? `mailto:${config.org.email}` : ''}>Contact Us</a>
             <Divider className="link-divider" />
