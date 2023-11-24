@@ -70,16 +70,33 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
+      <section className="call-to-action" style={SiteTheme.WhatIsSection}>
+        <div className="container">
+          <h1 className="container-thin">
+            What is DevFest?
+          </h1>
+          <p>
+            DevFest is a global community-driven tech conference, hosted by the Google Developer Groups (GDG) community. 
+            Each DevFest event is crafted by its GDG organizers to fit the learning needs and interests of their local developer 
+            community, with a strong focus on knowledge exchange, networking, and learning about Google developer technologies.
+          </p>
+          <p>
+            DevFest KC is hosted in partnership by GDG Kansas City and the Google Developer Student Club (GDSC) at UMKC. While Google 
+            a sponsor of the event, these groups are and always will be volunteer-led and non-profit. All ticket sales and proceeds 
+            go directly into putting on DevFest KC and the groups' other events throughout the year.
+          </p>
+        </div>
+      </section>
+
       <section className="call-to-action" style={SiteTheme.InfoSection}>
         <div className="container">
           <h1 className="container-thin">
             What can you expect from a day at DevFest KC?
           </h1>
-
-          <p>Show up early and grab a boxed breakfast. <b>Check-in and breakfast start at 7:45.</b></p>
-          <p>Strike up a conversation with someone between sessions. DevFest attracts a wide range of attendees, from long-time career developers to students.</p>
-          <p><b>Boxed lunches will be provided</b> and give plenty of time to meet new people.</p>
-          <p>Be sure to stay through the closing remarks for some <b>special giveaways!</b></p>
+          <p>Campus parking permits are not enforced on weekends. It's suggested to park in the <b>Cherry Street garage</b> and take the skywalk to the Student Union.</p>
+          <p>Check-in starts at <b>7:45 AM</b> with the keynote starting at <b>8:30 AM</b>. If you have to join later, the check-in and event help desk will move to the fourth floor, just outside the session rooms.</p>
+          <p><b>Boxed breakfast and lunch</b> will be available to attendees. <b>Coffee, water, light snacks, and networking space</b> will be available throughout the day, as well.</p>
+          <p>Be sure to stay through the closing remarks at <b>4 PM</b> for some <b>special giveaways!</b></p>
         </div>
       </section>
 

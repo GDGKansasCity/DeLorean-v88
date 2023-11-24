@@ -11,6 +11,10 @@ export const SiteTheme = {
     Primary: almostBlack,
     Color: '#fff'
   },
+  WhatIsSection: {
+    backgroundColor: blueColor,
+    color: '#fff'
+  },
   InfoSection: {
     backgroundColor: almostBlack,
     color: '#fff'
