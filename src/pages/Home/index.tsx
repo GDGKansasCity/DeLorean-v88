@@ -54,7 +54,7 @@ const Home: FC<HomeProps> = ({ config }) => {
             {DevfestDetails.description}
           </h1>
 
-          <h3>{startDate && format(startDate, 'MMMM d, yyyy')}</h3>
+          <h3>{startDate && format(startDate, 'EEEE, MMMM d, yyyy')}</h3>
           <h3>{config?.venue?.name}</h3>
 
           <div className="mt-4">
