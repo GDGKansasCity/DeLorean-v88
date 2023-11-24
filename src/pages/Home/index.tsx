@@ -82,7 +82,7 @@ const Home: FC<HomeProps> = ({ config }) => {
           </p>
           <p>
             DevFest KC is hosted in partnership by GDG Kansas City and the Google Developer Student Club (GDSC) at UMKC. While Google 
-            a sponsor of the event, these groups are and always will be volunteer-led and non-profit. All ticket sales and proceeds 
+            is a sponsor of the event, these groups are and always will be volunteer-led and non-profit. All ticket sales and proceeds 
             go directly into putting on DevFest KC and the groups' other events throughout the year.
           </p>
         </div>
