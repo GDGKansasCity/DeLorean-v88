@@ -4,6 +4,18 @@
     justify-content: center;
     flex-direction: column;
 
+    .mapBox {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      
+      .mapImage {
+        max-width: 300px;
+        margin: auto;
+        padding: 12px;
+      }
+    }
+
     .timeslot {
       &-header {
         height: 80px;

@@ -13,6 +13,10 @@ import { getSpeakers } from 'store/speakers/selectors';
 
 import { Typography } from '@mui/material';
 
+import FirstFloorMap from '/assets/map1.png';
+import SecondFloorMap from '/assets/map2.png';
+import FourthFloorMap from '/assets/map4.png';
+
 import './Schedule.scss';
 
 type ScheduleProps = ReturnType<typeof mapStateToProps>;
@@ -71,6 +75,15 @@ class SchedulePage extends React.Component<ScheduleProps> {
     return (
       <main className="schedule page-base">
         <div className="container">
+          <h1>Venue Map</h1>
+          <div className="container mapBox">
+            <img className="mapImage" src={FirstFloorMap} />
+            <img className="mapImage" src={SecondFloorMap} />
+            <img className="mapImage" src={FourthFloorMap} />
+          </div>
+        </div>
+        <div className="container">
+          <h1>Schedule</h1>
           {this.buildTimeSlot()}
         </div>
       </main>
