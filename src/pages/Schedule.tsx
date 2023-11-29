@@ -71,15 +71,21 @@ class SchedulePage extends React.Component<ScheduleProps> {
     );
   }
 
+  buildMapImage = (image: string) => {
+    return <a href={image} target="_blank">
+      <img className="mapImage" src={image} />
+    </a>;
+  }
+
   render() {
     return (
       <main className="schedule page-base">
         <div className="container">
           <h1>Venue Map</h1>
           <div className="container mapBox">
-            <img className="mapImage" src={FirstFloorMap} />
-            <img className="mapImage" src={SecondFloorMap} />
-            <img className="mapImage" src={FourthFloorMap} />
+            {this.buildMapImage(FirstFloorMap)}
+            {this.buildMapImage(SecondFloorMap)}
+            {this.buildMapImage(FourthFloorMap)}
           </div>
         </div>
         <div className="container">
