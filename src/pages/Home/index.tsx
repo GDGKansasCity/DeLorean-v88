@@ -93,7 +93,7 @@ const Home: FC<HomeProps> = ({ config }) => {
           <h1 className="container-thin">
             What can you expect from a day at DevFest KC?
           </h1>
-          <p>Campus parking permits are not enforced on weekends. It's suggested to park in the <b>Cherry Street garage</b> and take the skywalk to the Student Union.</p>
+          <p>Campus parking permits are not enforced on weekends. It's suggested to park in the <b>Cherry Street garage</b> and take the skywalk to the Student Union. You can see a campus map on the <a style={{color: "white"}} href="https://www.umkc.edu/about/documents/umkc-volker-campus-map-0823.pdf" target="_blank">UMKC website</a>.</p>
           <p>Check-in starts at <b>7:45 AM</b> with the keynote starting at <b>8:30 AM</b>. If you have to join later, the check-in and event help desk will move to the fourth floor, just outside the session rooms.</p>
           <p><b>Boxed breakfast and lunch</b> will be available to attendees. <b>Coffee, water, light snacks, and networking space</b> will be available throughout the day, as well.</p>
           <p>Be sure to stay through the closing remarks at <b>4 PM</b> for some <b>special giveaways!</b></p>
