@@ -16,6 +16,7 @@ import 'tinymce/icons/default';
 import 'tinymce/models/dom';
 import 'tinymce/skins/ui/oxide-dark/skin.css';
 import 'tinymce/plugins/autolink';
+import 'tinymce/plugins/link';
 import 'tinymce/plugins/lists';
 import 'tinymce/plugins/advlist';
 
@@ -97,13 +98,14 @@ const SessionEditor: FC<SessionEditorProps> = ({
   const initTinyMce = () => {
     tinymce.init({
       selector: '.description-editor > textarea',
-      plugins: [ 'autolink', 'lists', 'advlist' ],
+      plugins: [ 'autolink', 'link', 'lists', 'advlist' ],
       resize: false,
       menubar: false,
       statusbar: false,
       font_family_formats: 'Roboto',
       invalid_styles: 'color font-size font-family background-color',
-      toolbar: 'undo redo | bold italic underline strikethrough | bullist numlist | outdent indent'
+      toolbar: 'undo redo | bold italic underline strikethrough | bullist numlist | outdent indent | link unlink',
+      default_link_target: '_blank'
     }).then(() => {
       if (initState?.description) {
         tinymce.activeEditor.setContent(initState.description);
