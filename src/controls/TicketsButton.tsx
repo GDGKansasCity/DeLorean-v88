@@ -134,7 +134,7 @@ const TicketButton = () => {
       id: `get-header-event-tickets-${EventbriteConfig.eventId}`,
       color: 'secondary',
       variant: isFooterVisible ? 'extended' : null,
-      href: 'https://devfestkc23.eventbrite.com/?aff=dotcom',
+      href: EventbriteConfig.url,
       target: '_blank'
     };
 
@@ -156,7 +156,7 @@ const TicketButton = () => {
     id: `get-header-event-tickets-${EventbriteConfig.eventId}`,
     color: 'secondary',
     variant: 'contained',
-    href: 'https://devfestkc23.eventbrite.com/?aff=dotcom',
+    href: EventbriteConfig.url,
     target: '_blank'
   };
 

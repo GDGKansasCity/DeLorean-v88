@@ -62,7 +62,7 @@ const Home: FC<HomeProps> = ({ config }) => {
                 id={`get-event-tickets-${EventbriteConfig.eventId}`} 
                 variant="contained" 
                 color="secondary" 
-                href='https://devfestkc23.eventbrite.com/?aff=dotcom'
+                href={EventbriteConfig.url}
                 target='_blank'>
               Get Tickets
             </Button>
@@ -88,6 +88,8 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
+      <Papercall />
+
       <section className="call-to-action" style={SiteTheme.InfoSection}>
         <div className="container">
           <h1 className="container-thin">
@@ -100,7 +102,7 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
-      <section className="call-to-action" style={SiteTheme.CallToAction}>
+      {/* <section className="call-to-action" style={SiteTheme.CallToAction}>
         <div className="container">
           <h1 className="container-thin">
             Looking for all the sessions and speakers?
@@ -114,9 +116,8 @@ const Home: FC<HomeProps> = ({ config }) => {
             </Fab>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      <Papercall />
       <Venue />
       <Sponsors />
     </main>

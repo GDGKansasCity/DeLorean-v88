@@ -20,7 +20,7 @@ export const SiteTheme = {
     color: '#fff'
   },
   CallToAction: {
-    backgroundColor: greenColor,
+    backgroundColor: redColor,
     color: '#fff'
   },
   SponsorHeader: {
@@ -40,7 +40,8 @@ export const FirebaseConfig = {
 };
 
 export const EventbriteConfig = {
-  eventId: process.env.DELOREAN_EVENT_ID
+  eventId: process.env.DELOREAN_EVENT_ID,
+  url: 'https://devfestkc24.eventbrite.com/?aff=dotcom'
 };
 
 export const MapsConfig = {
