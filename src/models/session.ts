@@ -18,6 +18,11 @@ export type SessionEditorFullState = SessionEditorState & {
   ref?: DocumentReference;
 };
 
+export type SessionChanges = {
+  ref: DocumentReference, 
+  session: Session
+}
+
 export enum SessionTypes {
   BREAK = 'Break',
   SESSION = 'Session',
