@@ -11,6 +11,7 @@ import { DevfestDetails } from 'config/delorean.details.js';
 const Sponsors: FC = () => {
   const sponsors = useSelector(getSponsors);
   const config = useSelector(getCurrentConfig);
+  const prospectus = config?.event?.sponsors?.prospectus;
 
   return (
     <section className="sponsors">
@@ -21,10 +22,11 @@ const Sponsors: FC = () => {
 
         <div className="action container-thin">
           <span>{`Meet the organizations that make ${DevfestDetails.name} ${DevfestDetails.location} possible. If you’d like to learn more about sponsoring, `}</span>
-          {/* {<span>read our </span>} */}
-          {/* <a href={config?.event?.sponsors?.prospectus}>Sponsor Prospectus</a> */}
-          {/* <span> or </span> */}
-          <a href={config?.org ? `mailto:${config.org.email}` : ''}>email us</a>
+          {
+            prospectus
+              ? (<span>read our <a href={config?.event?.sponsors?.prospectus}>Sponsor Prospectus</a>.</span>)
+              : (<span><a href={config?.org ? `mailto:${config.org.email}` : ''}>email us</a>.</span>)
+          }
         </div>
       </header>
 
