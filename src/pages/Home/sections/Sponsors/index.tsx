@@ -24,9 +24,10 @@ const Sponsors: FC = () => {
           <span>{`Meet the organizations that make ${DevfestDetails.name} ${DevfestDetails.location} possible. If you’d like to learn more about sponsoring, `}</span>
           {
             prospectus
-              ? (<span>read our <a href={config?.event?.sponsors?.prospectus}>Sponsor Prospectus</a>.</span>)
-              : (<span><a href={config?.org ? `mailto:${config.org.email}` : ''}>email us</a>.</span>)
+              ? (<span>read our <a href={config?.event?.sponsors?.prospectus}>Sponsor Prospectus</a> and </span>)
+              : (null)
           }
+          <span><a href={config?.org ? `mailto:${config.org.email}` : ''}>email us</a>.</span>
         </div>
       </header>
 
