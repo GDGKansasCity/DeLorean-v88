@@ -3,4 +3,5 @@ export interface Profile {
     email: string;
     admin: boolean;
     favorites: String[];
+    showOnlyFavorites: boolean;
 }
