@@ -20,7 +20,7 @@ export const SiteTheme = {
     color: '#fff'
   },
   CallToAction: {
-    backgroundColor: redColor,
+    backgroundColor: greenColor,
     color: '#fff'
   },
   SponsorHeader: {
