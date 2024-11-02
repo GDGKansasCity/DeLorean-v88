@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { connect } from 'react-redux';
 import { DocumentSnapshot } from 'firebase/firestore';
 import { formatToTimeZone } from 'date-fns-timezone';
@@ -8,7 +8,7 @@ import { ApplicationState } from 'models/states';
 import { Session } from 'models/session';
 import { Speaker } from 'models/speaker';
 import { getSessionByStartTime, getUnscheduledSessions } from 'store/sessions/selectors';
-import { getEventTimezone } from 'store/current/selectors';
+import { getEventTimezone, getUserProfile } from 'store/current/selectors';
 import { getSpeakers } from 'store/speakers/selectors';
 
 import { Typography } from '@mui/material';
@@ -58,7 +58,7 @@ class SchedulePage extends React.Component<ScheduleProps> {
   }
 
   buildSessionSheet = (session: DocumentSnapshot) => {
-    const { speakers } = this.props;
+    const { speakers, profile } = this.props;
     const data = session.data() as Session;
 
     const links: Speaker[] = [];
@@ -76,6 +76,7 @@ class SchedulePage extends React.Component<ScheduleProps> {
         speakers={links}
         reference={session.ref}
         session={data}
+        isFavorite={profile && profile.favorites && profile.favorites.includes(session.id)}
       />
     );
   }
@@ -110,7 +111,8 @@ const mapStateToProps = (state: ApplicationState) => ({
   timezone: getEventTimezone(state),
   scheduled: getSessionByStartTime(state),
   unscheduled: getUnscheduledSessions(state),
-  speakers: getSpeakers(state)
+  speakers: getSpeakers(state),
+  profile: getUserProfile(state)
 });
 
 export default connect(mapStateToProps)(SchedulePage);

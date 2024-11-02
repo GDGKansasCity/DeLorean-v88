@@ -59,7 +59,7 @@ const MainLayout: FC = () => {
         dispatch(setUser(user));
 
         const profile = await getDoc(doc(db, `/users/${user.uid}`));
-        dispatch(setUserProfile(profile.data() as Profile))
+        dispatch(setUserProfile(profile.data() as Profile));
         setFirstLoad(false);
 
         logEvent(analytics, 'login');
