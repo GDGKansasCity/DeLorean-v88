@@ -8,7 +8,7 @@ import { ApplicationState } from 'models/states';
 import { Session } from 'models/session';
 import { Speaker } from 'models/speaker';
 import { getSessionByStartTime, getUnscheduledSessions } from 'store/sessions/selectors';
-import { getDatabase, getEventTimezone, getUser, getUserProfile } from 'store/current/selectors';
+import { getDatabase, getEventTimezone, getFirebaseAuth, getUser, getUserProfile } from 'store/current/selectors';
 import { getSpeakers } from 'store/speakers/selectors';
 
 import { Button, Typography } from '@mui/material';
@@ -21,6 +21,7 @@ import './Schedule.scss';
 import { RadioButtonChecked, RadioButtonUnchecked } from '@mui/icons-material';
 import { Profile } from 'models/user';
 import { setUserProfile } from 'store/current/reducer';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 type ScheduleProps = ReturnType<typeof mapStateToProps>;
 
@@ -28,6 +29,7 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
   const dispatch = useDispatch();
   const db = useSelector(getDatabase);
   const user = useSelector(getUser);
+  const auth = useSelector(getFirebaseAuth);
 
   const buildTimeSlot = () => {
     const times = Object.keys(scheduled).sort();
@@ -91,8 +93,17 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
     </a>;
   };
 
+  const onGoogleLogin = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  }
+
   const buildFavoriteToggle = () => {
-    if (!profile) return null;
+    if (!profile) return (
+      <Button onClick={onGoogleLogin}>
+        Sign in to save favorites
+      </Button>
+    );
 
     return (
       <Button variant="text" className="showFavorites" onClick={toggleFavorites}>
