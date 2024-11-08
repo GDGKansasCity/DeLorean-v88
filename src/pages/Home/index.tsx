@@ -120,7 +120,7 @@ const Home: FC<HomeProps> = ({ config }) => {
       </section>
 
       <Venue />
-      {/* <Sponsors /> */}
+      <Sponsors />
     </main>
   );
 }
