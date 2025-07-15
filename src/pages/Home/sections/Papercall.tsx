@@ -27,7 +27,7 @@ const Papercall = ({ config }) => {
   };
 
   return closing && isBefore(new Date(), closing) && (
-    <section className="call-to-action" style={SiteTheme.CallToAction}>
+    <section className="call-to-action" style={SiteTheme.YellowSection}>
       <div className="container">
         <h1 className="container-thin">
           {`Interested in speaking at ${DevfestDetails.name} ${DevfestDetails.location}?`}

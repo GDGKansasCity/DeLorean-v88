@@ -7,7 +7,6 @@ import { getSponsors, getCurrentConfig } from 'store/current/selectors';
 import { SiteTheme } from 'config/delorean.config';
 import { DevfestDetails } from 'config/delorean.details.js';
 
-
 const Sponsors: FC = () => {
   const sponsors = useSelector(getSponsors);
   const config = useSelector(getCurrentConfig);
@@ -21,7 +20,7 @@ const Sponsors: FC = () => {
         </div>
 
         <div className="action container-thin">
-          <span>{`Meet the organizations that make ${DevfestDetails.name} ${DevfestDetails.location} possible. If you’d like to learn more about sponsoring, `}</span>
+          <span>{`Meet the organizations that make ${DevfestDetails.name} ${DevfestDetails.location} possible. If you'd like to learn more about sponsoring, `}</span>
           {
             prospectus
               ? (<span>read our <a href={config?.event?.sponsors?.prospectus}>Sponsor Prospectus</a> and </span>)

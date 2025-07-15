@@ -68,3 +68,4 @@ out/
 Dockerfile
 /.idea
 /functions/lib
+.DS_Store

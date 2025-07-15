@@ -67,8 +67,8 @@ const Header = ({ }) => {
 
   return (
     <AppBar position="sticky" className="header">
-      <div className="inner container">
-        <nav className="nav" >
+      <div className="inner container hidden">
+        <nav className="nav">
           <Tabs
             value={route}
             onChange={onNavigationChanged}

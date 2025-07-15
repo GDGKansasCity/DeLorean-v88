@@ -11,6 +11,10 @@ export const SiteTheme = {
     Primary: almostBlack,
     Color: '#fff'
   },
+  YellowSection: {
+    backgroundColor: yellowColor,
+    color: '#000'
+  },
   WhatIsSection: {
     backgroundColor: blueColor,
     color: '#fff'
@@ -31,17 +35,17 @@ export const SiteTheme = {
 
 export const FirebaseConfig = {
   apiKey: process.env.DELOREAN_API_KEY,
-  authDomain: "devfest-kc-2023.firebaseapp.com",
-  projectId: "devfest-kc-2023",
-  storageBucket: "devfest-kc-2023.appspot.com",
-  messagingSenderId: "374670673309",
-  appId: "1:374670673309:web:1f51d56313f9650f019b74",
-  measurementId: "G-9TEP7Z401Y",
+  authDomain: "devfest-kc-8b940.firebaseapp.com",
+  projectId: "devfest-kc-8b940",
+  storageBucket: "devfest-kc-8b940.firebasestorage.app",
+  messagingSenderId: "1029251079616",
+  appId: "1:1029251079616:web:d9424aaf0fe5b69bf5bc25",
+  measurementId: "G-ZE01V3DG9Z"
 };
 
 export const EventbriteConfig = {
   eventId: process.env.DELOREAN_EVENT_ID,
-  url: 'https://devfestkc24.eventbrite.com/?aff=dotcom'
+  url: '' // TODO: add Eventbrite
 };
 
 export const MapsConfig = {
