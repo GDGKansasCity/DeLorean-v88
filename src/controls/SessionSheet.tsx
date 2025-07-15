@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { DocumentReference, deleteDoc } from '@firebase/firestore';
+import { DocumentReference, arrayRemove, arrayUnion, deleteDoc, doc, getDoc, updateDoc } from '@firebase/firestore';
 import { intervalToDuration } from 'date-fns/fp';
 import createDOMPurify from 'dompurify';
 
@@ -14,25 +14,44 @@ import SpeakerDetails from '../components/dialogs/Details';
 
 import { Speaker } from 'models/speaker';
 import { Session, SessionTypes } from 'models/session';
+import { Profile } from 'models/user';
 import { isEditMode } from 'store/admin/selectors';
 import { openDialog } from 'store/dialogs/reducer';
 import { editSession } from 'store/sessions/reducer';
 
-import { ExpandMore, Delete, Edit } from '@mui/icons-material';
+import { ExpandMore, Delete, Edit, Star, StarOutline } from '@mui/icons-material';
 
 import './SessionSheet.scss';
+import { getDatabase, getUser } from 'store/current/selectors';
+import { setUserProfile } from 'store/current/reducer';
 
 type Props = {
   speakers: Speaker[];
   session: Session;
   reference: DocumentReference;
+  isFavorite: Boolean;
 };
 
 const DOMPurify = createDOMPurify(window);
 
-const SessionSheet: FC<Props> = ({ session, speakers, reference }) => {
+const SessionSheet: FC<Props> = ({ session, speakers, reference, isFavorite }) => {
   const dispatch = useDispatch();
   const isEditing = useSelector(isEditMode);
+  const db = useSelector(getDatabase);
+  const user = useSelector(getUser);
+
+  const onFavoriteClicked = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const path = `/users/${user.uid}`;
+    await updateDoc(doc(db, path),{
+      favorites: isFavorite ? arrayRemove(reference.id) : arrayUnion(reference.id)
+    });
+
+    const profile = await getDoc(doc(db, `/users/${user.uid}`));
+    dispatch(setUserProfile(profile.data() as Profile));
+  };
 
   const onSpeakerClicked = (speaker) => () => {
     dispatch(
@@ -63,6 +82,16 @@ const SessionSheet: FC<Props> = ({ session, speakers, reference }) => {
   const hasDescription = useMemo(() => session.description.length > 0, [session.description]);
   const hasSpeakers = useMemo(() => session.speakers.length > 0, [session.speakers]);
   const hasSlides = useMemo(() => session.slidesUrl && session.slidesUrl.length > 0, [session.slidesUrl])
+
+  const buildFavoriteAction = () => (
+    <div className="edit-actions">
+      <Tooltip title="Favorite" placement="top">
+        <Button variant="text" className="favorite" onClick={onFavoriteClicked}>
+          {isFavorite ? <Star /> : <StarOutline />}
+        </Button>
+      </Tooltip>
+    </div>
+  );
 
   const buildAdminActions = () => (
     <div className="edit-actions">
@@ -143,10 +172,17 @@ const SessionSheet: FC<Props> = ({ session, speakers, reference }) => {
     );
   }
 
+  var actions: React.JSX.Element;
+  if (isEditing) {
+    actions = buildAdminActions();
+  } else if (user && !user.isAnonymous) {
+    actions = buildFavoriteAction();
+  }
+
   if (!hasDescription && !hasSpeakers && !hasSlides) {
     return (
       <Paper square className="session-card">
-        {isEditing ? buildAdminActions() : null}
+        {actions}
         {buildSessionHeader()}
       </Paper>
     );
@@ -154,7 +190,7 @@ const SessionSheet: FC<Props> = ({ session, speakers, reference }) => {
     return (
       <Accordion className="session">
         <AccordionSummary expandIcon={<ExpandMore />} >
-          {isEditing ? buildAdminActions() : null}
+          {actions}
           {buildSessionHeader()}
         </AccordionSummary>
         <AccordionDetails>
