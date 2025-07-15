@@ -73,25 +73,27 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
-      <section className="call-to-action" style={SiteTheme.CallToAction}>
-        <div className="container">
-          <h1 className="container-thin">
-            Help make DevFest KC a success!
-          </h1>
-          <p>
-            As a community-driven event, our events don't happen without sponsors. Our goal this year is growth. Read our Sponsor Prospectus and reach out if interested.
+      <div className="cta-container">
+        <section className="call-to-action" style={SiteTheme.CallToAction}>
+          <div className="container">
+            <h1 className="container-thin">
+              Help make DevFest KC a success!
+            </h1>
+            <p>
+              As a community-driven event, our events don't happen without sponsors. Our goal this year is growth. Read our Sponsor Prospectus and reach out if interested.
+            </p>
             <div className="action">
-            <Fab href={config?.event?.sponsors?.prospectus}>
-              <ArrowRight />
-            </Fab>
+              <Fab href={config?.event?.sponsors?.prospectus}>
+                <ArrowRight />
+              </Fab>
+            </div>
           </div>
-          </p>
-        </div>
-      </section>
+        </section>
 
-      <Papercall />
+        <Papercall />
+      </div>
 
-      <section className="call-to-action" style={SiteTheme.WhatIsSection}>
+      <section className="call-to-action" style={SiteTheme.BlackSection}>
         <div className="container">
           <h1 className="container-thin">
             What is DevFest?
@@ -109,7 +111,7 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
-      <section className="call-to-action" style={SiteTheme.InfoSection}>
+      <section className="call-to-action" style={SiteTheme.BlueSection}>
         <div className="container">
           <h1 className="container-thin">
             What can you expect from a day at DevFest KC?
