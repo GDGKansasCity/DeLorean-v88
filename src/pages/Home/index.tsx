@@ -58,7 +58,7 @@ const Home: FC<HomeProps> = ({ config }) => {
           <h3>{startDate && format(startDate, 'EEEE, MMMM d, yyyy')}</h3>
           <h3>{config?.venue?.name}</h3>
 
-          <div className="mt-4 hidden">
+          <div className="mt-4">
             <Button 
                 id={`get-event-tickets-${EventbriteConfig.eventId}`} 
                 variant="contained" 
@@ -68,8 +68,6 @@ const Home: FC<HomeProps> = ({ config }) => {
               Get Tickets
             </Button>
           </div>
-
-          <h2>Tickets coming soon!</h2>
         </div>
       </section>
 

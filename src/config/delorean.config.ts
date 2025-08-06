@@ -45,7 +45,7 @@ export const FirebaseConfig = {
 
 export const EventbriteConfig = {
   eventId: process.env.DELOREAN_EVENT_ID,
-  url: '' // TODO: add Eventbrite
+  url: 'https://devfestkc25.eventbrite.com/?aff=dotcom'
 };
 
 export const MapsConfig = {
