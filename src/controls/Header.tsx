@@ -67,7 +67,7 @@ const Header = ({ }) => {
 
   return (
     <AppBar position="sticky" className="header">
-      <div className="inner container hidden">
+      <div className="inner container">
         <nav className="nav">
           <Tabs
             value={route}
