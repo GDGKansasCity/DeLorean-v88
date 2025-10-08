@@ -68,7 +68,7 @@ const Home: FC<HomeProps> = ({ config }) => {
               Get Tickets
             </Button>
           </div>
-          <h3 className="mt-4">Early bird available for a limited time!</h3>
+          <h3 className="mt-4">Hurry before tickets run out!</h3>
         </div>
       </section>
 
