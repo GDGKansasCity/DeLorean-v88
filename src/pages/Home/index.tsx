@@ -72,7 +72,7 @@ const Home: FC<HomeProps> = ({ config }) => {
         </div>
       </section>
 
-      <div className="cta-container">
+      <div className="cta-container hidden">
         <section className="call-to-action" style={SiteTheme.CallToAction}>
           <div className="container">
             <h1 className="container-thin">
