@@ -5,7 +5,7 @@ import { useLocation, useNavigation } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { EventbriteConfig } from 'config/delorean.config';
-import { selectShowTickets } from 'store/current/selectors';
+import { selectShowTickets, getCurrentConfig } from 'store/current/selectors';
 import { Button, ButtonProps, Collapse, Fab, Grow, Typography, Zoom } from '@mui/material';
 import { LocalActivity } from '@mui/icons-material';
 
@@ -109,6 +109,7 @@ const TicketButton = () => {
   }
 
   const showTickets = useSelector(selectShowTickets);
+  const config = useSelector(getCurrentConfig);
 
   if (!showTickets) {
     return null;
@@ -118,7 +119,7 @@ const TicketButton = () => {
     return (
       <motion.div ref={scope} className="get-ticket-mobile">
         <Zoom in={!isTicketsVisible} unmountOnExit>
-          <Fab id={`get-event-tickets-${EventbriteConfig.eventId}`} size="large" color="secondary" variant="extended">
+          <Fab id={`get-event-tickets-${EventbriteConfig.eventId}`} size="large" color="secondary" variant="extended" href={config?.event?.ticketUrl} target="_blank">
             <Collapse in={isFooterVisible} orientation="horizontal" collapsedSize={24} exit={true}>
               <div className="contents">
                 <LocalActivity />
@@ -143,7 +144,7 @@ const TicketButton = () => {
     id: `get-event-tickets-${EventbriteConfig.eventId}`,
     color: 'secondary',
     variant: 'contained',
-    href: EventbriteConfig.url,
+    href: config?.event?.ticketUrl,
     target: '_blank'
   };
 

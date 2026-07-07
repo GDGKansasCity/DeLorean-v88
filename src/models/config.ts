@@ -34,6 +34,7 @@ interface Event {
   papercall?: PaperCall;
   sponsors?: Sponsors;
   timezone?: string;
+  ticketUrl?: string;
 }
 
 interface PaperCall {

@@ -35,6 +35,7 @@ const initialState = {
   picture: '',
   papercall: '',
   prospectus: '',
+  ticketUrl: '',
 };
 
 const SiteConfig: FC<SiteConfigProps> = ({
@@ -68,7 +69,8 @@ const SiteConfig: FC<SiteConfigProps> = ({
       prospectus: config?.event?.sponsors?.prospectus,
       timezone: config?.event?.timezone,
       startDate: config?.event?.startDate?.toDate(),
-      speakerClose: config?.event?.papercall?.closing?.toDate()
+      speakerClose: config?.event?.papercall?.closing?.toDate(),
+      ticketUrl: config?.event?.ticketUrl || '',
     });
   }, [config]);
 
@@ -120,6 +122,7 @@ const SiteConfig: FC<SiteConfigProps> = ({
         ...config?.event,
         startDate: fields.startDate || null,
         timezone: fields.timezone || null,
+        ticketUrl: fields.ticketUrl || null,
         papercall: {
           ...config?.event.papercall,
           url: fields.papercall || null,
@@ -207,6 +210,9 @@ const SiteConfig: FC<SiteConfigProps> = ({
                 onChange={(e, newValue) => onOptionChange(newValue, 'timezone')}
                 renderInput={(params) => <TextField {...params} label="Event Timezone" />}
               />
+            </FormControl>
+            <FormControl className="form-control">
+              <TextField label="Tickets Link" value={fields.ticketUrl} onChange={e => onSettingChange(e, 'ticketUrl')} />
             </FormControl>
             <FormControl className="form-control">
               <TextField label="Venue Name" value={fields.venueName} onChange={e => onSettingChange(e, 'venueName')} helperText="Displayed in intro (top of home page)" />
