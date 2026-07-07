@@ -47,19 +47,32 @@
   .cta-container {
     position: relative;
     z-index: 10;
+    margin: 2rem 0;
+
+    & > * {
+      max-width: 700px;
+      width: 94%;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
+        0 6px 6px rgba(0, 0, 0, 0.15);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     @media (min-width: 1000px) {
       display: flex;
+      justify-content: center;
       gap: 2rem;
       margin: -80px 0 40px;
       padding: 0 2rem;
 
       & > * {
         flex: 1;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1),
-          0 6px 6px rgba(0, 0, 0, 0.15);
+        margin: 0;
       }
     }
   }
