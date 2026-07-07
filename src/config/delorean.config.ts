@@ -35,17 +35,17 @@ export const SiteTheme = {
 
 export const FirebaseConfig = {
   apiKey: process.env.DELOREAN_API_KEY,
-  authDomain: "devfest-kc-8b940.firebaseapp.com",
-  projectId: "devfest-kc-8b940",
-  storageBucket: "devfest-kc-8b940.firebasestorage.app",
-  messagingSenderId: "1029251079616",
-  appId: "1:1029251079616:web:d9424aaf0fe5b69bf5bc25",
-  measurementId: "G-ZE01V3DG9Z"
+  authDomain: "devfest-kc-2026.firebaseapp.com",
+  projectId: "devfest-kc-2026",
+  storageBucket: "devfest-kc-2026.firebasestorage.app",
+  messagingSenderId: "838370455463",
+  appId: "1:838370455463:web:22cbd6529e519fa55d9082",
+  measurementId: "G-F3FYFDJ1KP"
 };
 
 export const EventbriteConfig = {
   eventId: process.env.DELOREAN_EVENT_ID,
-  url: 'https://devfestkc25.eventbrite.com/?aff=dotcom'
+  url: ''
 };
 
 export const MapsConfig = {

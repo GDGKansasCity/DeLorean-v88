@@ -1,15 +1,5 @@
 {
   "projects": {
-    "default": "devfest-kc-8b940"
-  },
-  "targets": {
-    "devfest-kc-8b940": {
-      "hosting": {
-        "prod": [
-          "devfest-kc-2025"
-        ]
-      }
-    }
-  },
-  "etags": {}
+    "default": "devfest-kc-2026"
+  }
 }
