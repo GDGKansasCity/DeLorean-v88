@@ -4,7 +4,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import { Button, ClickAwayListener, Divider, MenuItem, MenuList, Paper, Popover } from '@mui/material';
 
-import { getFirebaseAuth, getUser, getUserProfile } from 'store/current/selectors';
+import { getFirebaseAuth, getUser, getUserProfile, selectAllowLogin } from 'store/current/selectors';
 import { toggleEditMode } from 'store/admin/reducer';
 import { toggleConfig } from 'store/config/reducer';
 
@@ -15,6 +15,7 @@ const UserMenu = () => {
   const user = useSelector(getUser);
   const auth = useSelector(getFirebaseAuth);
   const profile = useSelector(getUserProfile);
+  const allowLogin = useSelector(selectAllowLogin);
 
   const [isOpen, setState] = useState(false);
 
@@ -65,6 +66,9 @@ const UserMenu = () => {
   }
 
   if (!user) {
+    if (!allowLogin) {
+      return null;
+    }
     return (
       <Button onClick={onGoogleLogin}>
         Sign In

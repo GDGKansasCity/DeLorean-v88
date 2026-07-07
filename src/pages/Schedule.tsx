@@ -8,7 +8,7 @@ import { ApplicationState } from 'models/states';
 import { Session } from 'models/session';
 import { Speaker } from 'models/speaker';
 import { getSessionByStartTime, getUnscheduledSessions } from 'store/sessions/selectors';
-import { getDatabase, getEventTimezone, getFirebaseAuth, getUser, getUserProfile } from 'store/current/selectors';
+import { getDatabase, getEventTimezone, getFirebaseAuth, getUser, getUserProfile, selectAllowLogin } from 'store/current/selectors';
 import { getSpeakers } from 'store/speakers/selectors';
 
 import { Button, Typography } from '@mui/material';
@@ -24,7 +24,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 type ScheduleProps = ReturnType<typeof mapStateToProps>;
 
-const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, speakers, profile }) => {
+const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, speakers, profile, allowLogin }) => {
   const dispatch = useDispatch();
   const db = useSelector(getDatabase);
   const user = useSelector(getUser);
@@ -102,11 +102,16 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
   }
 
   const buildFavoriteToggle = () => {
-    if (!profile) return (
-      <Button onClick={onGoogleLogin}>
-        Sign in to save favorites
-      </Button>
-    );
+    if (!profile) {
+      if (!allowLogin) {
+        return null;
+      }
+      return (
+        <Button onClick={onGoogleLogin}>
+          Sign in to save favorites
+        </Button>
+      );
+    }
 
     return (
       <Button variant="text" className="showFavorites" onClick={toggleFavorites}>
@@ -147,7 +152,8 @@ const mapStateToProps = (state: ApplicationState) => ({
   scheduled: getSessionByStartTime(state),
   unscheduled: getUnscheduledSessions(state),
   speakers: getSpeakers(state),
-  profile: getUserProfile(state)
+  profile: getUserProfile(state),
+  allowLogin: selectAllowLogin(state)
 });
 
 export default connect(mapStateToProps)(SchedulePage);

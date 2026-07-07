@@ -53,3 +53,9 @@ export const selectShowTickets = createSelector(
     return flags?.showTickets ?? false;
   }
 );
+
+export const selectAllowLogin = createSelector(
+  [getFeatureFlags], flags => {
+    return flags?.allowLogin !== false;
+  }
+);
