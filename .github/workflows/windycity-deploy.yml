@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - uses: w9jds/setup-firebase@main
         with:
           tools-version: 'v13.0.1'
