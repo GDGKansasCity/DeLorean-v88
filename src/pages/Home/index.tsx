@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
-import { format } from 'date-fns';
+import { connect } from 'react-redux';
+import { format, isBefore } from 'date-fns';
 
 import { Button, Fab } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
@@ -11,7 +11,7 @@ import Papercall from './sections/Papercall';
 import { DeloreanRoutes } from 'components/MainLayout';
 
 import { ApplicationState } from 'models/states';
-import { getCurrentConfig, selectShowTickets } from 'store/current/selectors';
+import { getCurrentConfig, selectShowTickets, selectFeatureProspectus } from 'store/current/selectors';
 import { SiteTheme, EventbriteConfig } from 'config/delorean.config';
 import { DevfestDetails } from 'config/delorean.details.js';
 
@@ -23,11 +23,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 type HomeProps = ReturnType<typeof mapStateToProps>;
 
-const Home: FC<HomeProps> = ({ config, showTickets }) => {
+const Home: FC<HomeProps> = ({ config, showTickets, featureProspectus }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const startDate = config?.event?.startDate?.toDate();
+  const showProspectus = !!config?.event?.sponsors?.prospectus && featureProspectus;
+  const showPapercall = !!(config?.event?.papercall?.closing?.toDate() && isBefore(new Date(), config.event.papercall.closing.toDate()));
 
   useEffect(() => {
     // if (location.pathname !== DeloreanRoutes.HOME) {
@@ -76,25 +78,29 @@ const Home: FC<HomeProps> = ({ config, showTickets }) => {
         </div>
       </section>
 
-      <div className="cta-container hidden">
-        <section className="call-to-action" style={SiteTheme.CallToAction}>
-          <div className="container">
-            <h1 className="container-thin">
-              Help make DevFest KC a success!
-            </h1>
-            <p>
-              As a community-driven event, our events don't happen without sponsors. Our goal this year is growth. Read our Sponsor Prospectus and reach out if interested.
-            </p>
-            <div className="action">
-              <Fab href={config?.event?.sponsors?.prospectus}>
-                <ArrowRight />
-              </Fab>
-            </div>
-          </div>
-        </section>
+      {(showProspectus || showPapercall) && (
+        <div className="cta-container">
+          {showProspectus && (
+            <section className="call-to-action" style={SiteTheme.CallToAction}>
+              <div className="container">
+                <h1 className="container-thin">
+                  Help make DevFest KC a success!
+                </h1>
+                <p>
+                  As a community-driven event, our events don't happen without sponsors. Our goal this year is growth. Read our Sponsor Prospectus and reach out if interested.
+                </p>
+                <div className="action">
+                  <Fab href={config?.event?.sponsors?.prospectus}>
+                    <ArrowRight />
+                  </Fab>
+                </div>
+              </div>
+            </section>
+          )}
 
-        <Papercall />
-      </div>
+          {showPapercall && <Papercall />}
+        </div>
+      )}
 
       <section className="call-to-action" style={SiteTheme.BlackSection}>
         <div className="container">
@@ -150,7 +156,8 @@ const Home: FC<HomeProps> = ({ config, showTickets }) => {
 
 const mapStateToProps = (state: ApplicationState) => ({
   config: getCurrentConfig(state),
-  showTickets: selectShowTickets(state)
+  showTickets: selectShowTickets(state),
+  featureProspectus: selectFeatureProspectus(state)
 });
 
 export default connect(mapStateToProps)(Home);
