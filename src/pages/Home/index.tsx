@@ -11,7 +11,7 @@ import Papercall from './sections/Papercall';
 import { DeloreanRoutes } from 'components/MainLayout';
 
 import { ApplicationState } from 'models/states';
-import { getCurrentConfig } from 'store/current/selectors';
+import { getCurrentConfig, selectShowTickets } from 'store/current/selectors';
 import { SiteTheme, EventbriteConfig } from 'config/delorean.config';
 import { DevfestDetails } from 'config/delorean.details.js';
 
@@ -23,7 +23,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 type HomeProps = ReturnType<typeof mapStateToProps>;
 
-const Home: FC<HomeProps> = ({ config }) => {
+const Home: FC<HomeProps> = ({ config, showTickets }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -58,17 +58,21 @@ const Home: FC<HomeProps> = ({ config }) => {
           <h3>{startDate && format(startDate, 'EEEE, MMMM d, yyyy')}</h3>
           <h3>{config?.venue?.name}</h3>
 
-          <div className="mt-4">
-            <Button 
-                id={`get-event-tickets-${EventbriteConfig.eventId}`} 
-                variant="contained" 
-                color="secondary" 
-                href={EventbriteConfig.url}
-                target='_blank'>
-              Get Tickets
-            </Button>
-          </div>
-          <h3 className="mt-4">Hurry before tickets run out!</h3>
+          {showTickets && (
+            <>
+              <div className="mt-4">
+                <Button 
+                    id={`get-event-tickets-${EventbriteConfig.eventId}`} 
+                    variant="contained" 
+                    color="secondary" 
+                    href={EventbriteConfig.url}
+                    target='_blank'>
+                  Get Tickets
+                </Button>
+              </div>
+              <h3 className="mt-4">Hurry before tickets run out!</h3>
+            </>
+          )}
         </div>
       </section>
 
@@ -145,7 +149,8 @@ const Home: FC<HomeProps> = ({ config }) => {
 }
 
 const mapStateToProps = (state: ApplicationState) => ({
-  config: getCurrentConfig(state)
+  config: getCurrentConfig(state),
+  showTickets: selectShowTickets(state)
 });
 
 export default connect(mapStateToProps)(Home);

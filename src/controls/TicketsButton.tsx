@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { motion, useAnimate } from 'framer-motion';
 import { useLocation, useNavigation } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { EventbriteConfig } from 'config/delorean.config';
+import { selectShowTickets } from 'store/current/selectors';
 import { Button, ButtonProps, Collapse, Fab, Grow, Typography, Zoom } from '@mui/material';
 import { LocalActivity } from '@mui/icons-material';
 
@@ -104,6 +106,12 @@ const TicketButton = () => {
 
     setFooterVisibility(footerVisible);
     setTicketsVisibility(ticketsVisible);
+  }
+
+  const showTickets = useSelector(selectShowTickets);
+
+  if (!showTickets) {
+    return null;
   }
 
   if (isMobile) {

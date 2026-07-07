@@ -44,4 +44,12 @@ export const getEventTimezone = createSelector(
   [getCurrentConfig], config => {
     return config?.event?.timezone;
   }
-)
+);
+
+export const getFeatureFlags = (state: ApplicationState) => state.current.flags;
+
+export const selectShowTickets = createSelector(
+  [getFeatureFlags], flags => {
+    return flags?.showTickets ?? false;
+  }
+);

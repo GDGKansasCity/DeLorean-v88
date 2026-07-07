@@ -3,7 +3,7 @@ import { FirebaseApp } from 'firebase/app';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Profile } from 'models/user';
-import { CurrentState } from 'models/states';
+import { CurrentState, FeatureFlags } from 'models/states';
 import Configuration from 'models/config';
 import Sponsor from 'models/sponsor';
 
@@ -12,7 +12,8 @@ const initialState: CurrentState = {
   profile: undefined,
   firebase: undefined,
   config: undefined,
-  sponsors: undefined
+  sponsors: undefined,
+  flags: undefined
 };
 
 const currentSlice = createSlice({
@@ -34,12 +35,15 @@ const currentSlice = createSlice({
     setSponsors: (state, action: PayloadAction<Record<string, Sponsor>>) => {
       state.sponsors = action.payload;
     },
+    setFeatureFlags: (state, action: PayloadAction<FeatureFlags>) => {
+      state.flags = action.payload;
+    },
 
     // Saga Triggers
     getSiteData: () => {},
   }
 });
 
-export const { setUser, setUserProfile, setFirebaseApplication, setSiteConfig, setSponsors, getSiteData } = currentSlice.actions;
+export const { setUser, setUserProfile, setFirebaseApplication, setSiteConfig, setSponsors, getSiteData, setFeatureFlags } = currentSlice.actions;
 
 export default currentSlice;

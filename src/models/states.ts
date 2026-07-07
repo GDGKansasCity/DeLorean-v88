@@ -18,12 +18,18 @@ export interface ApplicationState {
   readonly sessions: SessionState;
 }
 
+export interface FeatureFlags {
+  readonly showTickets?: boolean;
+  readonly [key: string]: any;
+}
+
 export type CurrentState = {
   readonly user?: User;
   readonly profile?: Profile;
   readonly firebase?: FirebaseApp;
   readonly config: Configuration;
-  readonly sponsors: Record<string, Sponsor>
+  readonly sponsors: Record<string, Sponsor>;
+  readonly flags?: FeatureFlags;
 };
 
 export type AdminState = {

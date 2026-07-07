@@ -4,9 +4,10 @@ import { sync, Payload } from '../firestore';
 
 import Sponsor from 'models/sponsor';
 import Configuration from 'models/config';
+import { FeatureFlags } from 'models/states';
 
 import { getDatabase } from './selectors';
-import { getSiteData, setSiteConfig, setSponsors } from './reducer';
+import { getSiteData, setSiteConfig, setSponsors, setFeatureFlags } from './reducer';
 
 
 function* loadSiteConfig() {
@@ -40,9 +41,22 @@ function* loadEventSponsors() {
   });
 }
 
+function* loadFeatureFlags() {
+  const db: Firestore = yield select(getDatabase);
+
+  yield fork(sync, doc(db, 'config/flags'), {
+    successAction: setFeatureFlags,
+    transform: (payload: Payload) => {
+      const snapshot = payload.snapshot as DocumentSnapshot;
+      return snapshot.data() as FeatureFlags;
+    }
+  });
+}
+
 export function* sagas() {
   yield all([
     takeEvery(getSiteData.type, loadSiteConfig),
     takeEvery(getSiteData.type, loadEventSponsors),
+    takeEvery(getSiteData.type, loadFeatureFlags),
   ]);
 }
