@@ -21,6 +21,7 @@ export interface ApplicationState {
 export interface FeatureFlags {
   readonly showTickets?: boolean;
   readonly allowLogin?: boolean;
+  readonly showNavBar?: boolean;
   readonly [key: string]: any;
 }
 

@@ -59,3 +59,9 @@ export const selectAllowLogin = createSelector(
     return flags?.allowLogin !== false;
   }
 );
+
+export const selectShowNavBar = createSelector(
+  [getFeatureFlags], flags => {
+    return flags?.showNavBar !== false;
+  }
+);

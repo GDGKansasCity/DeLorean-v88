@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import UserMenu from './UserMenu';
 import TicketButton from './TicketsButton';
 import { DeloreanRoutes } from 'components/MainLayout';
 import { EventbriteConfig } from 'config/delorean.config';
+import { selectShowNavBar } from 'store/current/selectors';
 
 import { AppBar, Tabs, Tab } from '@mui/material';
 
@@ -15,6 +17,7 @@ const Header = ({ }) => {
   const navigate = useNavigate();
 
   const [route, setRoute] = useState(0);
+  const showNavBar = useSelector(selectShowNavBar);
 
   useEffect(() => {
     switch (location.pathname) {
@@ -63,6 +66,10 @@ const Header = ({ }) => {
       default:
         break;
     }
+  }
+
+  if (!showNavBar) {
+    return null;
   }
 
   return (
