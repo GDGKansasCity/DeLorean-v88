@@ -113,7 +113,7 @@ const Home: FC<HomeProps> = ({ config, showTickets, featureProspectus }) => {
             community, with a strong focus on knowledge exchange, networking, and learning about Google developer technologies.
           </p>
           <p>
-            DevFest KC is hosted in partnership by GDG Kansas City and the Google Developer Student Club (GDSC) at UMKC. While Google 
+            DevFest KC is hosted in partnership by GDG Kansas City. While Google 
             is a sponsor of the event, these groups are and always will be volunteer-led and non-profit. All ticket sales and proceeds 
             go directly into putting on DevFest KC and the groups' other events throughout the year.
           </p>
@@ -125,9 +125,9 @@ const Home: FC<HomeProps> = ({ config, showTickets, featureProspectus }) => {
           <h1 className="container-thin">
             What can you expect from a day at DevFest KC?
           </h1>
-          <p>Campus parking permits are not enforced on weekends. It's suggested to park in the lots directly north of the building off Rockhill Road and enter through the Library entrance to the north or the Learning Center entrance to the west. You can see a campus map on the <a style={{color: "white"}} href="https://www.umkc.edu/about/documents/umkc-volker-campus-map-0823.pdf" target="_blank">UMKC website</a>.</p>
-          <p>Doors open at 11:15 for check-in followed with the Opening Remarks right on the 1st floor. If you have to join later, the check-in and event help desk will remain open on the 1st floor.</p>
-          <p><b>Boxed lunch</b> will be available to attendees. <b>Coffee, water, light snacks, and networking space</b> will be available throughout the day, as well.</p>
+          <p>Campus parking permits are not enforced on weekends. You can see a campus map on the <a style={{color: "white"}} href="https://www.umkc.edu/about/documents/umkc-volker-campus-map-0823.pdf" target="_blank">UMKC website</a> for the nearest parking areas.</p>
+          <p>Doors open with plenty of time for check-in followed with the Opening Remarks. If you have to join later, the check-in and event help desk will remain open.</p>
+          <p><b>Lunch</b> will be available to attendees. <b>Coffee, water, light snacks, and networking space</b> will be available throughout the day, as well.</p>
           <p>Be sure to stay through the closing remarks after all sessions for some <b>special giveaways!</b></p>
         </div>
       </section>
