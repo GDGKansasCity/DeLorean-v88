@@ -14,8 +14,7 @@ import { getSpeakers } from 'store/speakers/selectors';
 import { Button, Typography } from '@mui/material';
 
 import FirstFloorMap from '/assets/map1.png';
-import SecondFloorMap from '/assets/map2.png';
-import FourthFloorMap from '/assets/map4.png';
+import ThirdFloorMap from '/assets/map3.png';
 
 import './Schedule.scss';
 import { RadioButtonChecked, RadioButtonUnchecked } from '@mui/icons-material';
@@ -87,10 +86,14 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
     );
   };
 
-  const buildMapImage = (image: string) => {
-    return <a href={image} target="_blank">
-      <img className="mapImage" src={image} />
-    </a>;
+  const buildMapImage = (label: string, image: string) => {
+    return (
+      <div className="mapContainer" style={{ textAlign: 'center' }}>
+        <Typography variant="h4">{label}</Typography>
+        <a href={image} target="_blank" rel="noopener noreferrer">
+          <img className="mapImage" src={image} alt={label} />
+        </a>
+      </div>);
   };
 
   const onGoogleLogin = () => {
@@ -126,9 +129,8 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
       <div className="container">
         <h1>Venue Map</h1>
         <div className="container mapBox">
-          {buildMapImage(FirstFloorMap)}
-          {buildMapImage(SecondFloorMap)}
-          {buildMapImage(FourthFloorMap)}
+          {buildMapImage('First Floor', FirstFloorMap)}
+          {buildMapImage('Third Floor', ThirdFloorMap)}
         </div>
       </div>
       <div className="container">
