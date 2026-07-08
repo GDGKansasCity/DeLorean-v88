@@ -11,12 +11,12 @@ import { ApplicationState } from 'models/states';
 import { toggleConfig } from 'store/config/reducer';
 import { MapsConfig } from 'config/delorean.config';
 import { isConfigDialogOpen } from 'store/config/selectors';
-import { getDatabase, getCurrentConfig } from 'store/current/selectors';
+import { getDatabase, getCurrentConfig, getFeatureFlags } from 'store/current/selectors';
 
 import { Close } from '@mui/icons-material';
 import { DatePicker, DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Button, TextField, Dialog, AppBar, Toolbar, IconButton, Typography, Slide, FormControl, Autocomplete } from '@mui/material';
+import { Button, TextField, Dialog, AppBar, Toolbar, IconButton, Typography, Slide, FormControl, Autocomplete, Checkbox, FormControlLabel } from '@mui/material';
 
 import './SiteConfig.scss';
 
@@ -36,12 +36,17 @@ const initialState = {
   papercall: '',
   prospectus: '',
   ticketUrl: '',
+  showTickets: false,
+  featureProspectus: false,
+  allowLogin: true,
+  showNavBar: true,
 };
 
 const SiteConfig: FC<SiteConfigProps> = ({
   db,
   open,
   config,
+  flags,
 
   toggleConfig
 }) => {
@@ -71,8 +76,12 @@ const SiteConfig: FC<SiteConfigProps> = ({
       startDate: config?.event?.startDate?.toDate(),
       speakerClose: config?.event?.papercall?.closing?.toDate(),
       ticketUrl: config?.event?.ticketUrl || '',
+      showTickets: flags?.showTickets ?? false,
+      featureProspectus: flags?.featureProspectus ?? false,
+      allowLogin: flags?.allowLogin !== false,
+      showNavBar: flags?.showNavBar !== false,
     });
-  }, [config]);
+  }, [config, flags]);
 
   useEffect(() => {
     if (open) {
@@ -95,6 +104,10 @@ const SiteConfig: FC<SiteConfigProps> = ({
   const onOptionChange = (newValue, name: string) => {
     setFields({ ...fields, [name]: newValue });
   }
+
+  const onCheckboxChange = (e, name: string) => {
+    setFields({ ...fields, [name]: e.target.checked });
+  };
 
   const handleClose = () => {
     setAutoComplete(null);
@@ -149,7 +162,15 @@ const SiteConfig: FC<SiteConfigProps> = ({
       };
     }
 
+    const updateFlags = {
+      showTickets: fields.showTickets,
+      featureProspectus: fields.featureProspectus,
+      allowLogin: fields.allowLogin,
+      showNavBar: fields.showNavBar,
+    };
+
     updateDoc(doc(db, '/config/devfest'), { ...update });
+    updateDoc(doc(db, '/config/flags'), { ...updateFlags });
     handleClose();
   }
 
@@ -212,9 +233,6 @@ const SiteConfig: FC<SiteConfigProps> = ({
               />
             </FormControl>
             <FormControl className="form-control">
-              <TextField label="Tickets Link" value={fields.ticketUrl} onChange={e => onSettingChange(e, 'ticketUrl')} />
-            </FormControl>
-            <FormControl className="form-control">
               <TextField label="Venue Name" value={fields.venueName} onChange={e => onSettingChange(e, 'venueName')} helperText="Displayed in intro (top of home page)" />
             </FormControl>
             <FormControl className="form-control">
@@ -231,6 +249,24 @@ const SiteConfig: FC<SiteConfigProps> = ({
           </div>
 
           <div>
+            <Typography variant="h6">Tickets Details</Typography>
+            <FormControl className="form-control">
+              <TextField label="Tickets Link" value={fields.ticketUrl} onChange={e => onSettingChange(e, 'ticketUrl')} />
+            </FormControl>
+            <FormControl className="form-control">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={fields.showTickets}
+                    onChange={e => onCheckboxChange(e, 'showTickets')}
+                  />
+                }
+                label="Show Tickets"
+              />
+            </FormControl>
+          </div>
+
+          <div>
             <Typography variant="h6">Call for Speakers Details</Typography>
             <FormControl className="form-control">
               <TextField label="Submit Talk Uri" value={fields.papercall} onChange={e => onSettingChange(e, 'papercall')} />
@@ -241,10 +277,47 @@ const SiteConfig: FC<SiteConfigProps> = ({
           </div>
 
           <div>
-          <Typography variant="h6">Sponsor Details</Typography>
-          <FormControl className="form-control">
-            <TextField label="Prospectus Uri" value={fields.prospectus} onChange={e => onSettingChange(e, 'prospectus')} />
-          </FormControl>
+            <Typography variant="h6">Sponsor Details</Typography>
+            <FormControl className="form-control">
+              <TextField label="Prospectus Uri" value={fields.prospectus} onChange={e => onSettingChange(e, 'prospectus')} />
+            </FormControl>
+            <FormControl className="form-control">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={fields.featureProspectus}
+                    onChange={e => onCheckboxChange(e, 'featureProspectus')}
+                  />
+                }
+                label="Show Sponsor Prospectus"
+              />
+            </FormControl>
+          </div>
+
+          <div>
+            <Typography variant="h6">Feature Flags</Typography>
+            <FormControl className="form-control">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={fields.allowLogin}
+                    onChange={e => onCheckboxChange(e, 'allowLogin')}
+                  />
+                }
+                label="Allow Sign In"
+              />
+            </FormControl>
+            <FormControl className="form-control">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={fields.showNavBar}
+                    onChange={e => onCheckboxChange(e, 'showNavBar')}
+                  />
+                }
+                label="Show Navigation Bar"
+              />
+            </FormControl>
           </div>
         </div>
       </Dialog>
@@ -255,7 +328,8 @@ const SiteConfig: FC<SiteConfigProps> = ({
 const mapStateToProps = (state: ApplicationState) => ({
   db: getDatabase(state),
   open: isConfigDialogOpen(state),
-  config: getCurrentConfig(state)
+  config: getCurrentConfig(state),
+  flags: getFeatureFlags(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
