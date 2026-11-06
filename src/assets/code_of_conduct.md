@@ -55,7 +55,7 @@ You can make a report either personally or anonymously.
 
 Anonymous Report
 ----------------
-You can make an anonymous report [here](https://forms.gle/RF4Pw64byLa2fuRu5). Your contact information is not collected, unless explicitly provided. If you choose to provide your information, we will follow up. In either case, we will fully investigate it and take whatever action is necessary to prevent a recurrence.
+You can make an [anonymous report here](https://docs.google.com/forms/d/e/1FAIpQLScsmXbS-F2q3hyvIJKED6RVgY-4hiPX210EUjJkw9JLMkITEQ/viewform?usp=publish-editor). Your contact information is not collected, unless explicitly provided. If you choose to provide your information, we will follow up. In either case, we will fully investigate it and take whatever action is necessary to prevent a recurrence.
 
 Personal Report
 ---------------

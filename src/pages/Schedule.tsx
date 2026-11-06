@@ -14,7 +14,6 @@ import { getSpeakers } from 'store/speakers/selectors';
 import { Button, Typography } from '@mui/material';
 
 import FirstFloorMap from '/assets/map1.png';
-import SecondFloorMap from '/assets/map2.png';
 import FourthFloorMap from '/assets/map4.png';
 
 import './Schedule.scss';
@@ -136,7 +135,6 @@ const SchedulePage: FC<ScheduleProps> = ({ timezone, scheduled, unscheduled, spe
         <h1>Venue Map</h1>
         <div className="container mapBox">
           {buildMapImage('First Floor', FirstFloorMap)}
-          {buildMapImage('Second Floor', SecondFloorMap)}
           {buildMapImage('Fourth Floor', FourthFloorMap)}
         </div>
       </div>
